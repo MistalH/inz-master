@@ -206,39 +206,42 @@ def widok_ratownika(request):
         if request.method == 'POST':
             zgloszenie_id = request.POST.get('zgloszenie_id')
             oddzial_id = request.POST.get('oddzial_ratunkowy')
+            usun_oddzial = request.POST.get('usun_oddzial')
 
             try:
                 zgloszenie = Zgloszenie.objects.get(id=zgloszenie_id)
-                oddzial = OddzialRatowniczy.objects.get(id=oddzial_id)
 
-                # Sprawdź, czy oddział jest już przypisany do innego zgłoszenia
-                oddzial_is_assigned = Zgloszenie.objects.filter(oddzial_ratowniczy=oddzial).exclude(id=zgloszenie_id).exists()
-                if not oddzial_is_assigned:
-                    zgloszenie.oddzial_ratowniczy = oddzial
+                if usun_oddzial:  # Logika do usunięcia przypisania oddziału
+                    zgloszenie.oddzial_ratowniczy = None
                     zgloszenie.save()
-                    messages.success(request, 'Oddział został przypisany do zgłoszenia.')
-
-                    # Wysyłanie e-maila z informacją o przypisaniu oddziału
-                    subject = 'Przypisanie oddziału ratowniczego'
-                    if zgloszenie.user and hasattr(zgloszenie.user, 'username'):
-                        user_username = zgloszenie.user.username
-                    else:
-                        user_username = "Nieznany użytkownik"
-                    message = f'Oddział ratowniczy {oddzial.nazwa} został przypisany do zgłoszenia użytkownika {user_username} na trasie {zgloszenie.trasa.nazwa}. Prosimy o natychmiastowe wyruszenie na miejsce zdarzenia i udzielenie pomocy w sytuacji awaryjnej. Upewnijcie się, że macie odpowiedni sprzęt ratowniczy i jesteście gotowi podjąć wszelkie niezbędne działania w celu zapewnienia bezpieczeństwa użytkownika i skutecznego przeprowadzenia akcji ratunkowej.'
-                    from_email = 'michaal11123@gmail.com'  # Zmień na swój e-mail
-                    recipient_list = ['michaal11123@gmail.com']  # Zmień na adres e-mail oddziału
-
-                    send_mail(
-                        subject,
-                        message,
-                        from_email,
-                        recipient_list,
-                        fail_silently=False,  # Ustaw na True, aby ukryć błędy
-                    )
-
+                    messages.success(request, 'Oddział został usunięty z zgłoszenia.')
                 else:
-                    messages.error(request, 'Ten oddział jest już przypisany do innego zgłoszenia.')
+                    oddzial = OddzialRatowniczy.objects.get(id=oddzial_id)
+                    oddzial_is_assigned = Zgloszenie.objects.filter(oddzial_ratowniczy=oddzial).exclude(id=zgloszenie_id).exists()
+                    if not oddzial_is_assigned:
+                        zgloszenie.oddzial_ratowniczy = oddzial
+                        zgloszenie.save()
+                        messages.success(request, 'Oddział został przypisany do zgłoszenia.')
 
+                        # Wysyłanie e-maila z informacją o przypisaniu oddziału
+                        subject = 'Przypisanie oddziału ratowniczego'
+                        if zgloszenie.user and hasattr(zgloszenie.user, 'username'):
+                            user_username = zgloszenie.user.username
+                        else:
+                            user_username = "Nieznany użytkownik"
+                        message = f'Oddział ratowniczy {oddzial.nazwa} został przypisany do zgłoszenia użytkownika {user_username} na trasie {zgloszenie.trasa.nazwa}. Prosimy Zachować Spokój Ratownicy Już Wyruszyli na Pomoc'
+                        from_email = 'michaal11123@gmail.com'
+                        recipient_list = ['michaal11123@gmail.com']
+
+                        send_mail(
+                            subject,
+                            message,
+                            from_email,
+                            recipient_list,
+                            fail_silently=False
+                        )
+                    else:
+                        messages.error(request, 'Ten oddział jest już przypisany do innego zgłoszenia.')
             except (Zgloszenie.DoesNotExist, OddzialRatowniczy.DoesNotExist):
                 messages.error(request, 'Nieprawidłowe zgłoszenie lub oddział.')
 
@@ -246,7 +249,12 @@ def widok_ratownika(request):
         oddzialy = OddzialRatowniczy.objects.filter(zgloszenie=None)
         przydziel_form = PrzydzielOddzialRatunkowyForm()
 
-        return render(request, 'widok_ratownika.html', {'zgloszenia': zgloszenia, 'oddzialy': oddzialy, 'uzytkownik': request.user, 'przydziel_form': przydziel_form})
+        return render(request, 'widok_ratownika.html', {
+            'zgloszenia': zgloszenia, 
+            'oddzialy': oddzialy, 
+            'uzytkownik': request.user, 
+            'przydziel_form': przydziel_form
+        })
 
     else:
         return render(request, 'brak_dostepu.html')

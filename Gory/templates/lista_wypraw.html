@@ -67,14 +67,13 @@
         <nav>
             <ul>
                 <li><a href="{% url 'home' %}">O Nas</a></li>
-                <li><a href="#">Szkolenia i Kursy</a></li>
-                <li><a href="#">Ekwipunek i Technologia</a></li>
-                <li><a href="#">Akcje Ratunkowe</a></li>
+                <li><a href="{% url 'szkolenia' %}">Szkolenia i Kursy</a></li>
+                <li><a href="{% url 'widok_ratownika' %}">Akcje Ratunkowe</a></li>
                 <li><a href="#">Galeria</a></li>
                 <li><a href="#">Kontakt</a></li>
                 <li><a href="{% url 'zgloszenie' %}">Zgłoś Pomoc</a></li>
                 <li><a href="{% url 'lista_wypraw' %}">Lista Wypraw</a></li>
-                <li><a href="trasa">Trasy</a></li>
+                <li><a href="{% url 'zaplanuj_trase' %}">Trasa</a></li>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'logout' %}">Wyloguj</a></li>
                 <li>Witaj, {{ user.username }}!</li>
@@ -93,7 +92,6 @@
                     <strong>Nazwa szczytu:</strong> {{ wyprawa.nazwa_szczytu }}<br>
                     <strong>Godzina wyjścia:</strong> {{ wyprawa.godzina_wyjscia }}<br>
                     <strong>Godzina zakończenia:</strong> {{ wyprawa.godzina_zakonczenia }}<br>
-                    <strong>Czas trwania:</strong> {{ wyprawa.czas_trwania }} minut<br>
                     {% if wyprawa.ukonczona %}
                         <strong>Status:</strong> Ukończona<br>
                         <a href="{% url 'ukoncz_wyprawe' wyprawa.id %}" class="btn" style="background: #e74c3c; color: #fff;">Oznacz jako nieukończona</a>

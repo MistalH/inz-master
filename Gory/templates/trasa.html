@@ -172,14 +172,13 @@ p {
         <nav>
             <ul>
                 <li><a href="{% url 'home' %}">O Nas</a></li>
-                <li><a href="#">Szkolenia i Kursy</a></li>
-                <li><a href="#">Ekwipunek i Technologia</a></li>
-                <li><a href="#">Bezpieczeństwo w Górach</a></li>
-                <li><a href="#">Akcje Ratunkowe</a></li>
+                <li><a href="{% url 'szkolenia' %}">Szkolenia i Kursy</a></li>
+                <li><a href="{% url 'widok_ratownika' %}">Akcje Ratunkowe</a></li>
                 <li><a href="#">Galeria</a></li>
-                <li><a href="#">Blog i Aktualności</a></li>
                 <li><a href="#">Kontakt</a></li>
                 <li><a href="{% url 'zgloszenie' %}">Zgłoś Pomoc</a></li>
+                <li><a href="{% url 'lista_wypraw' %}">Lista Wypraw</a></li>
+                <li><a href="{% url 'zaplanuj_trase' %}">Trasa</a></li>
                 {% if user.is_authenticated %}
                 <p>Witaj, {{ user.username }}!</p>
                 <a href="{% url 'logout' %}">Wyloguj</a>

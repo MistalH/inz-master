@@ -23,6 +23,7 @@ urlpatterns = [
     path('przydziel_oddzial_ratunkowy/', views.przydziel_oddzial_ratunkowy, name='przydziel_oddzial_ratunkowy'),
     path('historia-oddzialow/<int:zgloszenie_id>/', views.historia_oddzialow, name='historia_oddzialow'),
     path('szkolenia/', views.szkolenia, name='szkolenia'),
+    
 
 
 

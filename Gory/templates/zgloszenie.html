@@ -54,18 +54,23 @@ select:focus {
 }
 
 button {
-    background: #007BFF;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-}
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            flex-grow: 1;
+            margin-right: 10px;
+        }
 
-button:hover {
-    background: #0056b3;
-}
+        button:last-child {
+            margin-right: 0;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
 
 header {
     background-color: #130D29;
@@ -122,21 +127,20 @@ a:hover {
         <nav>
             <ul>
                 <li><a href="{% url 'home' %}">O Nas</a></li>
-                <li><a href="#">Szkolenia i Kursy</a></li>
-                <li><a href="#">Ekwipunek i Technologia</a></li>
-                <li><a href="#">Bezpieczeństwo w Górach</a></li>
-                <li><a href="#">Akcje Ratunkowe</a></li>
+                <li><a href="{% url 'szkolenia' %}">Szkolenia i Kursy</a></li>
+                <li><a href="{% url 'widok_ratownika' %}">Akcje Ratunkowe</a></li>
                 <li><a href="#">Galeria</a></li>
-                <li><a href="#">Blog i Aktualności</a></li>
                 <li><a href="#">Kontakt</a></li>
+                <li><a href="{% url 'zgloszenie' %}">Zgłoś Pomoc</a></li>
                 <li><a href="{% url 'lista_wypraw' %}">Lista Wypraw</a></li>
+                <li><a href="{% url 'zaplanuj_trase' %}">Trasa</a></li>
                 {% if user.is_authenticated %}
-        <li><a href="{% url 'logout' %}">Wyloguj</a></li>
-        <li>Witaj, {{ user.username }}!</li>
-    {% else %}
-        <li><a href="{% url 'login' %}">Zaloguj</a></li>
-        <li><a href="{% url 'register' %}">Zarejestruj</a></li>
-    {% endif %}
+                <li><a href="{% url 'logout' %}">Wyloguj</a></li>
+                <li>Witaj, {{ user.username }}!</li>
+                {% else %}
+                <li><a href="{% url 'login' %}">Zaloguj</a></li>
+                <li><a href="{% url 'register' %}">Zarejestruj</a></li>
+                {% endif %}
         </ul>
             </ul>
         </nav>
@@ -144,24 +148,37 @@ a:hover {
     </header>
     <body>
         <h1>Zgłoszenie potrzeby pomocy</h1>
-        {% if user.is_authenticated %}
-        {% endif %}
-        <form method="post">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="{{ form.trasa.id_for_label }}">Trasa:</label>
-                {{ form.trasa }}
-            </div>
-            <div class="form-group">
-                <label for="{{ form.godzina_wyruszenia.id_for_label }}">Godzina wyruszenia:</label>
-                {{ form.godzina_wyruszenia }}
-            </div>
-            <div class="form-group">
-                <label for="{{ form.potrzebuje_pomocy.id_for_label }}">Potrzebuję pomocy:</label>
-                {{ form.potrzebuje_pomocy }}
-            </div>
-            <input type="hidden" name="owner" value="{% if user.is_authenticated %}{{ user.username }}{% endif %}">
-            <button type="submit">Zgłoś potrzebę pomocy</button>
-        </form>
-    </body>
-    </html>
+    {% if user.is_authenticated %}
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.trasa.id_for_label }}">Trasa:</label>
+            {{ form.trasa }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.godzina_wyruszenia.id_for_label }}">Godzina wyruszenia:</label>
+            <input type="datetime-local" id="{{ form.godzina_wyruszenia.id_for_label }}" name="godzina_wyruszenia">
+        </div>
+        <button type="button" onclick="setNow()">Ustaw aktualną godzinę</button>
+        <div class="form-group">
+            <label for="{{ form.potrzebuje_pomocy.id_for_label }}">Potrzebuję pomocy:</label>
+            {{ form.potrzebuje_pomocy }}
+        </div>
+        <input type="hidden" name="owner" value="{% if user.is_authenticated %}{{ user.username }}{% endif %}">
+        <button type="submit">Zgłoś potrzebę pomocy</button>
+    </form>
+
+    <script>
+        function setNow() {
+            var now = new Date();
+            var month = (now.getMonth() + 1).toString().padStart(2, "0");
+            var day = now.getDate().toString().padStart(2, "0");
+            var hour = now.getHours().toString().padStart(2, "0");
+            var minute = now.getMinutes().toString().padStart(2, "0");
+            var dateTimeString = now.getFullYear() + '-' + month + '-' + day + 'T' + hour + ':' + minute;
+            document.getElementById("{{ form.godzina_wyruszenia.id_for_label }}").value = dateTimeString;
+        }
+    </script>
+</body>
+</html>

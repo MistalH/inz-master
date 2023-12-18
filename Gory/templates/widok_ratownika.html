@@ -195,6 +195,19 @@ input[type="submit"]:hover {
         th:nth-child(6), td:nth-child(7) {
             width: 15%; 
         }
+        .delete-button {
+    background-color: #ff4d4d; /* Czerwony kolor tła */
+    color: #fff; /* Biały kolor tekstu */
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Animacja zmiany koloru */
+}
+
+.delete-button:hover {
+    background-color: #cc0000; /* Ciemniejszy czerwony kolor po najechaniu */
+}
     </style>
 </head>
 
@@ -204,14 +217,13 @@ input[type="submit"]:hover {
         <nav>
             <ul>
                 <li><a href="{% url 'home' %}">O Nas</a></li>
-                <li><a href="#">Szkolenia i Kursy</a></li>
-                <li><a href="#">Ekwipunek i Technologia</a></li>
-                <li><a href="#">Akcje Ratunkowe</a></li>
+                <li><a href="{% url 'szkolenia' %}">Szkolenia i Kursy</a></li>
+                <li><a href="{% url 'widok_ratownika' %}">Akcje Ratunkowe</a></li>
                 <li><a href="#">Galeria</a></li>
                 <li><a href="#">Kontakt</a></li>
                 <li><a href="{% url 'zgloszenie' %}">Zgłoś Pomoc</a></li>
                 <li><a href="{% url 'lista_wypraw' %}">Lista Wypraw</a></li>
-                <li><a href="trasa">Trasy</a></li>
+                <li><a href="{% url 'zaplanuj_trase' %}">Trasa</a></li>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'logout' %}">Wyloguj</a></li>
                 <li>Witaj, {{ user.username }}!</li>
@@ -244,7 +256,7 @@ input[type="submit"]:hover {
                     <td>{{ zgloszenie.trasa.nazwa }}</td>
                     <td>{{ zgloszenie.godzina_wyruszenia|date:"j F Y, P" }}</td>
                     <td>{% if zgloszenie.potrzebuje_pomocy %}TAK{% else %}NIE{% endif %}</td>
-                    
+        
                     <td>
                         <form method="post" class="submit-form" data-zgloszenie-id="{{ zgloszenie.id }}">
                             {% csrf_token %}
@@ -252,19 +264,27 @@ input[type="submit"]:hover {
                             <select name="oddzial_ratunkowy">
                                 <option value="">Wybierz oddział</option>
                                 {% for oddzial in oddzialy %}
-                                    <option value="{{ oddzial.id }}">{{ oddzial.nazwa }}</option>
+                                    <option value="{{ oddzial.id }}" {% if zgloszenie.oddzial_ratowniczy.id == oddzial.id %}selected{% endif %}>{{ oddzial.nazwa }}</option>
                                 {% endfor %}
                             </select>
                             <button class="submit-button" type="submit">Zatwierdź zmiany</button>
                         </form>
+        
+                        <!-- Nowy formularz do usunięcia przypisania oddziału -->
+                        <form method="post" class="delete-form" data-zgloszenie-id="{{ zgloszenie.id }}">
+                            {% csrf_token %}
+                            <input type="hidden" name="zgloszenie_id" value="{{ zgloszenie.id }}">
+                            <input type="hidden" name="usun_oddzial" value="true">
+                            <button class="delete-button" type="submit">Usuń Oddział</button>
+                        </form>
                     </td>
-                    
+        
                     <td>
                         <button class="action-button" data-zgloszenie-id="{{ zgloszenie.id }}" data-ukonczone="false">
                             Oznacz jako Ukończone
                         </button>
                     </td>
-                    
+        
                     <td>
                         {% if zgloszenie.oddzial_ratowniczy %}
                             {{ zgloszenie.oddzial_ratowniczy.nazwa }}
