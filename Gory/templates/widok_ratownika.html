@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Widok Ratownika</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('/static/gory.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Dodaje efekt przyklejonego tła */
+}
+        header {
+            background-color: #130D29;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        nav {
+            text-align: center;
+        }
+        p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: rgb(182, 158, 158)aca;
+}
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        ul li {
+            margin-right: 20px;
+        }
+
+        ul li:last-child {
+            margin-right: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        a:hover {
+            border-bottom: 2px solid #fff;
+        }
+
+        @media screen and (max-width: 768px) {
+            ul {
+                flex-direction: column;
+            }
+
+            ul li {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+
+        h1 {
+    text-align: center;
+    color: #130D29; /* Możesz zmienić kolor na taki, który najlepiej pasuje do twojej strony */
+    margin-top: 20px;
+    margin-bottom: 20px; /* Dodaje odstęp na dole */
+    font-size: 28px; /* Większa czcionka */
+    font-weight: bold; /* Pogrubienie tekstu */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Lekki cień dla tekstu */
+}
+
+        h2 {
+            text-align: center;
+            color: #130D29;
+        }
+
+        table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+        th, td {
+            text-align: left;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #130D29;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        select {
+            width: 100%;
+            padding: 5px;
+        }
+
+        .submit-button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .action-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+.action-button:hover {
+    background-color: #0056b3;
+}
+form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Stylizacja etykiet w formularzu */
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+}
+nav {
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+ul li {
+    margin-right: 20px;
+}
+a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    border: 1px solid transparent; 
+}
+
+@media screen and (max-width: 768px) {
+    ul {
+        flex-direction: column;
+    }
+
+    ul li {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
+input[type="submit"] {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #01070e;
+}
+
+        th:nth-child(6), td:nth-child(7) {
+            width: 15%; 
+        }
+    </style>
+</head>
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">O Nas</a></li>
+                <li><a href="#">Szkolenia i Kursy</a></li>
+                <li><a href="#">Ekwipunek i Technologia</a></li>
+                <li><a href="#">Akcje Ratunkowe</a></li>
+                <li><a href="#">Galeria</a></li>
+                <li><a href="#">Kontakt</a></li>
+                <li><a href="{% url 'zgloszenie' %}">Zgłoś Pomoc</a></li>
+                <li><a href="{% url 'lista_wypraw' %}">Lista Wypraw</a></li>
+                <li><a href="trasa">Trasy</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">Wyloguj</a></li>
+                <li>Witaj, {{ user.username }}!</li>
+                {% else %}
+                <li><a href="{% url 'login' %}">Zaloguj</a></li>
+                <li><a href="{% url 'register' %}">Zarejestruj</a></li>
+                {% endif %} 
+            </ul>
+        </nav>
+    </header>
+    <h1>Lista Zgłoszeń Potrzeby Pomocy</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Użytkownik</th>
+                <th>Trasa</th>
+                <th>Godzina wyruszenia</th>
+                <th>Potrzebuje pomocy</th>
+                <th>Przydzielony oddział</th>
+                <th>Akcja</th>
+                <th>Jaki Oddział na Akcji</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for zgloszenie in zgloszenia %}
+                <tr>
+                    <td>{{ zgloszenie.id }}</td>
+                    <td><span class="user-username">{{ zgloszenie.user.username }}</span></td>
+                    <td>{{ zgloszenie.trasa.nazwa }}</td>
+                    <td>{{ zgloszenie.godzina_wyruszenia|date:"j F Y, P" }}</td>
+                    <td>{% if zgloszenie.potrzebuje_pomocy %}TAK{% else %}NIE{% endif %}</td>
+                    
+                    <td>
+                        <form method="post" class="submit-form" data-zgloszenie-id="{{ zgloszenie.id }}">
+                            {% csrf_token %}
+                            <input type="hidden" name="zgloszenie_id" value="{{ zgloszenie.id }}">
+                            <select name="oddzial_ratunkowy">
+                                <option value="">Wybierz oddział</option>
+                                {% for oddzial in oddzialy %}
+                                    <option value="{{ oddzial.id }}">{{ oddzial.nazwa }}</option>
+                                {% endfor %}
+                            </select>
+                            <button class="submit-button" type="submit">Zatwierdź zmiany</button>
+                        </form>
+                    </td>
+                    
+                    <td>
+                        <button class="action-button" data-zgloszenie-id="{{ zgloszenie.id }}" data-ukonczone="false">
+                            Oznacz jako Ukończone
+                        </button>
+                    </td>
+                    
+                    <td>
+                        {% if zgloszenie.oddzial_ratowniczy %}
+                            {{ zgloszenie.oddzial_ratowniczy.nazwa }}
+                        {% else %}
+                            Brak przydzielonego oddziału
+                        {% endif %}
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="8">Brak zgłoszeń potrzeby pomocy.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const userUsernameFields = document.querySelectorAll('input[name="user_username"]');
+        const userUsernameSpans = document.querySelectorAll('.user-username');
+
+        userUsernameFields.forEach((field, index) => {
+            userUsernameSpans[index].textContent = field.value;
+        });
+    });
+
+    const actionButtons = document.querySelectorAll('.action-button');
+
+    actionButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            oznaczJakoUkonczone(button);
+        });
+
+        const zgloszenieId = button.getAttribute('data-zgloszenie-id');
+        const isUkonczone = getCookie(`ukonczone_${zgloszenieId}`);
+
+        if (isUkonczone === 'true') {
+            button.style.backgroundColor = 'green';
+            button.innerHTML = 'Oznacz jako Nieukończone';
+        }
+    });
+
+    function oznaczJakoUkonczone(button) {
+        const zgloszenieId = button.getAttribute('data-zgloszenie-id');
+        const isUkonczone = button.getAttribute('data-ukonczone') === 'true';
+
+        if (isUkonczone) {
+            button.setAttribute('data-ukonczone', 'false');
+            button.style.backgroundColor = 'red';
+            button.innerHTML = 'Oznacz jako Ukończone';
+
+            document.cookie = `ukonczone_${zgloszenieId}=false`;
+        } else {
+            button.setAttribute('data-ukonczone', 'true');
+            button.style.backgroundColor = 'green';
+            button.innerHTML = 'Oznacz jako Nieukończone';
+
+            document.cookie = `ukonczone_${zgloszenieId}=true`;
+        }
+    }
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) {
+            return parts.pop().split(';').shift();
+        }
+    }
+</script>
+</body>
+</html>

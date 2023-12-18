@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Zgłoszenie potrzeby pomocy</title>
+    <style>
+  body {
+    background-image: url('/static/gory.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+}
+
+form {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 0 auto;
+    width: 50%;
+    animation: bounceInDown 1s;
+}
+
+.form-group {
+    margin: 10px 0;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="text"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="text"]:focus,
+select:focus {
+    border-color: #007BFF;
+}
+
+button {
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+header {
+    background-color: #130D29;
+    color: #fff;
+    padding: 10px 0;
+}
+
+nav {
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+ul li {
+    margin-right: 20px;
+}
+
+ul li:last-child {
+    margin-right: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+}
+
+a:hover {
+    border-bottom: 2px solid #fff;
+}
+
+/* Dodanie animacji opadania formularza */
+@keyframes bounceInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">O Nas</a></li>
+                <li><a href="#">Szkolenia i Kursy</a></li>
+                <li><a href="#">Ekwipunek i Technologia</a></li>
+                <li><a href="#">Bezpieczeństwo w Górach</a></li>
+                <li><a href="#">Akcje Ratunkowe</a></li>
+                <li><a href="#">Galeria</a></li>
+                <li><a href="#">Blog i Aktualności</a></li>
+                <li><a href="#">Kontakt</a></li>
+                <li><a href="{% url 'lista_wypraw' %}">Lista Wypraw</a></li>
+                {% if user.is_authenticated %}
+        <li><a href="{% url 'logout' %}">Wyloguj</a></li>
+        <li>Witaj, {{ user.username }}!</li>
+    {% else %}
+        <li><a href="{% url 'login' %}">Zaloguj</a></li>
+        <li><a href="{% url 'register' %}">Zarejestruj</a></li>
+    {% endif %}
+        </ul>
+            </ul>
+        </nav>
+        
+    </header>
+    <body>
+        <h1>Zgłoszenie potrzeby pomocy</h1>
+        {% if user.is_authenticated %}
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.trasa.id_for_label }}">Trasa:</label>
+                {{ form.trasa }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.godzina_wyruszenia.id_for_label }}">Godzina wyruszenia:</label>
+                {{ form.godzina_wyruszenia }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.potrzebuje_pomocy.id_for_label }}">Potrzebuję pomocy:</label>
+                {{ form.potrzebuje_pomocy }}
+            </div>
+            <input type="hidden" name="owner" value="{% if user.is_authenticated %}{{ user.username }}{% endif %}">
+            <button type="submit">Zgłoś potrzebę pomocy</button>
+        </form>
+    </body>
+    </html>

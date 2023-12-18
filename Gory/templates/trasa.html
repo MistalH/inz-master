@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Szlak w Tatrach</title>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('/static/gory.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+header {
+    background-color: #130D29;
+    color: #fff;
+    padding: 10px 0;
+}
+
+nav {
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+ul li {
+    margin-right: 20px;
+}
+
+ul li:last-child {
+    margin-right: 0;
+}
+.btn, input[type="submit"] {
+    display: inline-block;
+    background-color: #4e387e;
+    color: #fff;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover, input[type="submit"]:hover {
+    background-color: #6a4c93;
+}
+a, ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    transition: all 0.3s ease; /* Dla płynności */
+}
+
+
+.container, .form-group, form {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    max-width: 50%; /* Dla spójności */
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+    color: #333; /* Dla spójności */
+}
+
+select, input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+input[type="submit"], button {
+    background: #4e387e;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover, button:hover {
+    background: #6a4c93;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #130D29;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Dla h1 */
+}
+
+p {
+    text-align: center;
+    margin: 5px;
+}
+
+.informacje-o-szlaku {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.informacje-o-szlaku h2 {
+    color: #130D29;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.informacje-o-szlaku p {
+    color: #333;
+    margin: 5px 0;
+}
+
+/* Styl dla sekcji z mapą */
+.mapa {
+    max-width: 600px;
+    overflow: hidden;
+    margin: 0 auto;
+    min-width: 300px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.mapa iframe {
+    width: 100%;
+    border: 0;
+}
+
+.mapa a {
+    color: #999;
+    padding: 7px 0;
+    font-size: 13px;
+    font-family: Roboto, Arial, sans-serif;
+    display: inline-block;
+}
+
+/* Dodanie animacji */
+@keyframes bounceInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">O Nas</a></li>
+                <li><a href="#">Szkolenia i Kursy</a></li>
+                <li><a href="#">Ekwipunek i Technologia</a></li>
+                <li><a href="#">Bezpieczeństwo w Górach</a></li>
+                <li><a href="#">Akcje Ratunkowe</a></li>
+                <li><a href="#">Galeria</a></li>
+                <li><a href="#">Blog i Aktualności</a></li>
+                <li><a href="#">Kontakt</a></li>
+                <li><a href="{% url 'zgloszenie' %}">Zgłoś Pomoc</a></li>
+                {% if user.is_authenticated %}
+                <p>Witaj, {{ user.username }}!</p>
+                <a href="{% url 'logout' %}">Wyloguj</a>
+            {% else %}
+                <a href="{% url 'login' %}">Zaloguj</a> |
+                <a href="{% url 'register' %}">Zarejestruj</a>
+            {% endif %}
+            </ul>
+        </nav>
+    
+    </header>
+
+    <div class="container">
+        <form method="post" action="{% url 'zaplanuj_trase' %}">
+            {% csrf_token %}
+            <label for="szlak">Wybierz Szlak:</label>
+            <select name="szlak" id="szlak">
+                <option value="Rysy">Rysy</option>
+                <option value="Kościelec">Kościelec</option>
+                <option value="Giewont">Giewont</option>
+                <option value="Czerwone Wierchy">Czerwone Wierchy</option>
+                <option value="Świnica">Świnica</option>
+                <option value="Kasprowy Wierch">Kasprowy Wierch</option>
+                <option value="Mięguszowieckie Szczyty">Mięguszowieckie Szczyty</option>
+                <option value="Żabi Koń">Żabi Koń</option>
+                <option value="Granaty">Granaty</option>
+                <option value="Krywań">Krywań</option>
+                <option value="Ciemniak">Ciemniak</option>
+                <option value="Bystra">Bystra</option>
+                <option value="Rohacz Ostry">Rohacz Ostry</option>
+                <option value="Mały Kozi Wierch">Mały Kozi Wierch</option>
+                <option value="Wysoka">Wysoka</option>
+                <option value="Rakuska Przełęcz">Rakuska Przełęcz</option>
+                <option value="Czuba Sołtysia">Czuba Sołtysia</option>
+                <option value="Rakon">Rakon</option>
+                <option value="Opalony Wierch">Opalony Wierch</option>
+                <option value="Koprowy Wierch">Koprowy Wierch</option>
+                <option value="Świstowy Wierch">Świstowy Wierch</option>
+                <option value="Ornak">Ornak</option>
+                <option value="Kozie Czuby">Kozie Czuby</option>
+                <option value="Grzes">Grzes</option>
+                <option value="Hrubý Vrch">Hrubý Vrch</option>
+                <option value="Widłyków Wierch">Widłyków Wierch</option>
+                <option value="Kołowy Wierch">Kołowy Wierch</option>
+                <option value="Rysula">Rysula</option>
+                <option value="Tomanowy Wierch">Tomanowy Wierch</option>
+                <option value="Świniarska Kopa">Świniarska Kopa</option>
+            </select>
+            
+            <br>
+            
+            <input type="submit" value="Znajdź Informacje" class="btn">
+            <a href="{% url 'dodaj_wyprawe' %}" class="btn">Dodaj Wyprawę</a>
+            
+        </form>
+        
+        {% if trasa %}
+            <!-- To jest informacja o wybranym szlaku -->
+            <div class="informacje-o-szlaku">
+                <h2>Informacje o Wybranym Szlaku: {{ trasa.nazwa }}</h2>
+                <p>Czas Trwania: {{ trasa.czas_trwania }} Godzin</p>
+                <p>Schroniska: {{ trasa.schroniska }}</p>
+                <p>Notatka o Szycie: {{ trasa.notatka_o_szycie }}</p>
+                <p>Wysokość Szczytu: {{ trasa.wysokosc_szczytu }} m n.p.m.</p>
+                <p>Kolor Szlaku: {{ trasa.kolor_szlaku }}</p>
+                <p>Pasmo Górskie: {{ trasa.pasmo_gorskie }}</p>
+            </div>
+            
+            {% if trasa.nazwa == "Rysy" %}
+                <div class="mapa">
+                    <iframe src="https://mapa-turystyczna.pl/map/widget/route/h1l0p1/3kr6d.html" height="680" style="width:100%;border:0;" loading="lazy"></iframe>
+                    <a href="https://mapa-turystyczna.pl/route/3kr6d?utm_source=external_web&amp;utm_medium=widget&amp;utm_campaign=route_widget" target="_blank" rel="noopener">Trasa: Palenica Białczańska – Rysy | mapa-turystyczna.pl</a>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>

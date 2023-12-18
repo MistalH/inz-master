@@ -1,0 +1,392 @@
+[
+    {
+        "model": "Gory.Trasa",
+        "pk": 1,
+        "fields": {
+            "nazwa": "Rysy",
+            "czas_trwania": 5,
+            "schroniska": "Schronisko PTTK na Morskim Oku",
+            "notatka_o_szycie": "Wymaga sprzętu wspinaczkowego",
+            "wysokosc_szczytu": 2503,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Wysokie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 2,
+        "fields": {
+            "nazwa": "Kościelec",
+            "czas_trwania": 4,
+            "schroniska": "Schronisko w Dolinie Pięciu Stawów Polskich",
+            "notatka_o_szycie": "Trudne przejście",
+            "wysokosc_szczytu": 2291,
+            "kolor_szlaku": "Żółty",
+            "pasmo_gorskie": "Tatry Zachodnie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 3,
+        "fields": {
+            "nazwa": "Giewont",
+            "czas_trwania": 6,
+            "schroniska": "Schronisko PTTK na Kasprowym Wierchu",
+            "notatka_o_szycie": "Popularny szczyt",
+            "wysokosc_szczytu": 1894,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Zachodnie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 4,
+        "fields": {
+            "nazwa": "Czerwone Wierchy",
+            "czas_trwania": 7,
+            "schroniska": "Brak schronisk na trasie",
+            "notatka_o_szycie": "Widok na Tatry Zachodnie",
+            "wysokosc_szczytu": 1299,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Zachodnie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 5,
+        "fields": {
+            "nazwa": "Świnica",
+            "czas_trwania": 6,
+            "schroniska": "Schronisko PTTK w Dolinie Pięciu Stawów Polskich",
+            "notatka_o_szycie": "Wymaga sprzętu wspinaczkowego",
+            "wysokosc_szczytu": 2301,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Zachodnie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 6,
+        "fields": {
+            "nazwa": "Kasprowy Wierch",
+            "czas_trwania": 6,
+            "schroniska": "Schronisko PTTK na Kasprowym Wierchu",
+            "notatka_o_szycie": "Wymaga sprzętu wspinaczkowego",
+            "wysokosc_szczytu": 1987,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Zachodnie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 7,
+        "fields": {
+            "nazwa": "Mięguszowieckie Szczyty",
+            "czas_trwania": 8,
+            "schroniska": "Schronisko PTTK w Dolinie Pięciu Stawów Polskich",
+            "notatka_o_szycie": "Wymaga doświadczenia wspinaczkowego",
+            "wysokosc_szczytu": 2438,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Wysokie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 8,
+        "fields": {
+            "nazwa": "Żabi Koń",
+            "czas_trwania": 5,
+            "schroniska": "Brak schronisk na trasie",
+            "notatka_o_szycie": "Widok na Tatry Wysokie",
+            "wysokosc_szczytu": 2004,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Wysokie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 9,
+        "fields": {
+            "nazwa": "Granaty",
+            "czas_trwania": 10,
+            "schroniska": "Brak schronisk na trasie",
+            "notatka_o_szycie": "Wymaga doświadczenia wspinaczkowego",
+            "wysokosc_szczytu": 2335,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Wysokie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 10,
+        "fields": {
+            "nazwa": "Krywań",
+            "czas_trwania": 7,
+            "schroniska": "Brak schronisk na trasie",
+            "notatka_o_szycie": "Widok na Tatry Zachodnie",
+            "wysokosc_szczytu": 2495,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Wysokie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 11,
+        "fields": {
+            "nazwa": "Ciemniak",
+            "czas_trwania": 5,
+            "schroniska": "Schronisko PTTK na Hali Gąsienicowej",
+            "notatka_o_szycie": "Widok na Tatry Wysokie",
+            "wysokosc_szczytu": 2096,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Wysokie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 12,
+        "fields": {
+            "nazwa": "Bystra",
+            "czas_trwania": 6,
+            "schroniska": "Brak schronisk na trasie",
+            "notatka_o_szycie": "Widok na Tatry Zachodnie",
+            "wysokosc_szczytu": 2248,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Wysokie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 13,
+        "fields": {
+            "nazwa": "Rohacz Ostry",
+            "czas_trwania": 4,
+            "schroniska": "Brak schronisk na trasie",
+            "notatka_o_szycie": "Wymaga sprzętu wspinaczkowego",
+            "wysokosc_szczytu": 2096,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Zachodnie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 14,
+        "fields": {
+            "nazwa": "Mały Kozi Wierch",
+            "czas_trwania": 4,
+            "schroniska": "Brak schronisk na trasie",
+            "notatka_o_szycie": "Wymaga sprzętu wspinaczkowego",
+            "wysokosc_szczytu": 2212,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Zachodnie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 15,
+        "fields": {
+            "nazwa": "Wysoka",
+            "czas_trwania": 7,
+            "schroniska": "Brak schronisk na trasie",
+            "notatka_o_szycie": "Wymaga doświadczenia wspinaczkowego",
+            "wysokosc_szczytu": 2061,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Zachodnie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 16,
+        "fields": {
+            "nazwa": "Rakuska Przełęcz",
+            "czas_trwania": 3,
+            "schroniska": "Brak schronisk na trasie",
+            "notatka_o_szycie": "Trudne przejście",
+            "wysokosc_szczytu": 1763,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Zachodnie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 17,
+        "fields": {
+            "nazwa": "Czuba Sołtysia",
+            "czas_trwania": 5,
+            "schroniska": "Schronisko PTTK w Dolinie Pięciu Stawów Polskich",
+            "notatka_o_szycie": "Widok na Tatry Zachodnie",
+            "wysokosc_szczytu": 2029,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Zachodnie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 18,
+        "fields": {
+            "nazwa": "Rakon",
+            "czas_trwania": 4,
+            "schroniska": "Brak schronisk na trasie",
+            "notatka_o_szycie": "Wymaga doświadczenia wspinaczkowego",
+            "wysokosc_szczytu": 1920,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Zachodnie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 19,
+        "fields": {
+            "nazwa": "Opalony Wierch",
+            "czas_trwania": 3,
+            "schroniska": "Brak schronisk na trasie",
+            "notatka_o_szycie": "Widok na Tatry Wysokie",
+            "wysokosc_szczytu": 1888,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Zachodnie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 20,
+        "fields": {
+            "nazwa": "Koprowy Wierch",
+            "czas_trwania": 6,
+            "schroniska": "Brak schronisk na trasie",
+            "notatka_o_szycie": "Trudne przejście",
+            "wysokosc_szczytu": 2360,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Zachodnie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 21,
+        "fields": {
+            "nazwa": "Świstowy Wierch",
+            "czas_trwania": 4,
+            "schroniska": "Brak schronisk na trasie",
+            "notatka_o_szycie": "Trudne przejście",
+            "wysokosc_szczytu": 2068,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Wysokie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 22,
+        "fields": {
+            "nazwa": "Ornak",
+            "czas_trwania": 6,
+            "schroniska": "Brak schronisk na trasie",
+            "notatka_o_szycie": "Wymaga sprzętu wspinaczkowego",
+            "wysokosc_szczytu": 1857,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Wysokie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 23,
+        "fields": {
+            "nazwa": "Kozie Czuby",
+            "czas_trwania": 4,
+            "schroniska": "Brak schronisk na trasie",
+            "notatka_o_szycie": "Widok na Tatry Zachodnie",
+            "wysokosc_szczytu": 2362,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Zachodnie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 24,
+        "fields": {
+            "nazwa": "Grzes",
+            "czas_trwania": 6,
+            "schroniska": "Brak schronisk na trasie",
+            "notatka_o_szycie": "Wymaga doświadczenia wspinaczkowego",
+            "wysokosc_szczytu": 2291,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Zachodnie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 25,
+        "fields": {
+            "nazwa": "Hrubý Vrch",
+            "czas_trwania": 7,
+            "schroniska": "Brak schronisk na trasie",
+            "notatka_o_szycie": "Trudne przejście",
+            "wysokosc_szczytu": 2163,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Wysokie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 26,
+        "fields": {
+            "nazwa": "Widłyków Wierch",
+            "czas_trwania": 5,
+            "schroniska": "Brak schronisk na trasie",
+            "notatka_o_szycie": "Wymaga doświadczenia wspinaczkowego",
+            "wysokosc_szczytu": 1938,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Zachodnie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 27,
+        "fields": {
+            "nazwa": "Kołowy Wierch",
+            "czas_trwania": 4,
+            "schroniska": "Brak schronisk na trasie",
+            "notatka_o_szycie": "Trudne przejście",
+            "wysokosc_szczytu": 2091,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Zachodnie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 28,
+        "fields": {
+            "nazwa": "Rysula",
+            "czas_trwania": 5,
+            "schroniska": "Brak schronisk na trasie",
+            "notatka_o_szycie": "Widok na Tatry Wysokie",
+            "wysokosc_szczytu": 2365,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Wysokie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 29,
+        "fields": {
+            "nazwa": "Tomanowy Wierch",
+            "czas_trwania": 3,
+            "schroniska": "Brak schronisk na trasie",
+            "notatka_o_szycie": "Widok na Tatry Zachodnie",
+            "wysokosc_szczytu": 2178,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Zachodnie"
+        }
+    },
+    {
+        "model": "Gory.Trasa",
+        "pk": 30,
+        "fields": {
+            "nazwa": "Świniarska Kopa",
+            "czas_trwania": 4,
+            "schroniska": "Brak schronisk na trasie",
+            "notatka_o_szycie": "Wymaga sprzętu wspinaczkowego",
+            "wysokosc_szczytu": 1903,
+            "kolor_szlaku": "Czerwony",
+            "pasmo_gorskie": "Tatry Zachodnie"
+        }
+    }
+]

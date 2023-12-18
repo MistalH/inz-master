@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Szkolenia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('/static/gory.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        header {
+            background-color: #130D29;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li:last-child {
+            margin-right: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            border-bottom: 2px solid #fff;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #130D29;
+        }
+
+        .szkolenie {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .szkolenie:last-child {
+            border-bottom: none;
+        }
+
+        .szkolenie h2 {
+            color: #007BFF;
+        }
+
+        .szkolenie p {
+            margin: 5px 0;
+        }
+
+        .zapisz-sie-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            display: inline-block;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .zapisz-sie-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">O Nas</a></li>
+                <li><a href="#">Ekwipunek i Technologia</a></li>
+                <li><a href="#">Akcje Ratunkowe</a></li>
+                <li><a href="#">Galeria</a></li>
+                <li><a href="#">Kontakt</a></li>
+                <li><a href="{% url 'zgloszenie' %}">Zgłoś Pomoc</a></li>
+                <li><a href="{% url 'lista_wypraw' %}">Lista Wypraw</a></li>
+                <li><a href="trasa">Trasy</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">Wyloguj</a></li>
+                <li>Witaj, {{ user.username }}!</li>
+                {% else %}
+                <li><a href="{% url 'login' %}">Zaloguj</a></li>
+                <li><a href="{% url 'register' %}">Zarejestruj</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Nadchodzące Szkolenia</h1>
+
+        <div class="szkolenie">
+            <h2>Szkolenie Wspinaczkowe</h2>
+            <p>Data: 15 stycznia 2024</p>
+            <p>Opis: Poznaj podstawy wspinaczki górskiej z doświadczonymi instruktorami.</p>
+            <a href="#" class="zapisz-sie-btn">Zapisz się</a>
+        </div>
+
+        <div class="szkolenie">
+            <h2>Survival w Górach</h2>
+            <p>Data: 22 lutego 2024</p>
+            <p>Opis: Naucz się przetrwać w trudnych warunkach górskich.</p>
+            <a href="#" class="zapisz-sie-btn">Zapisz się</a>
+        </div>
+
+    </div>
+</body>
+</html>

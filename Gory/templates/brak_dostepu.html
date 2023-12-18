@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brak Dostępu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('/static/gory.jpg'); /* Ścieżka do obrazu w katalogu static */
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        header {
+            background-color: #130D29;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        nav {
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex; /* Ustawienie menu na flexbox */
+            justify-content: center; /* Wyśrodkowanie elementów menu */
+            flex-wrap: wrap; /* Zawijanie elementów menu na mniejszych ekranach */
+        }
+
+        ul li {
+            margin-right: 20px;
+        }
+
+        ul li:last-child {
+            margin-right: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        a:hover {
+            border-bottom: 2px solid #fff;
+        }
+
+        a.btn {
+            display: inline-block;
+            background-color: #4e387e; /* Kolor przycisków */
+            color: #fff;
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+
+        a.btn:hover {
+            background-color: #6a4c93; /* Kolor przycisków po najechaniu myszką */
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Strona główna</a></li>
+                <li><a href="#">O nas</a></li>
+                <li><a href="#">Usługi</a></li>
+                <li><a href="#">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Brak Dostępu</h1>
+        <p>Przepraszamy, ale nie masz dostępu do tej strony.</p>
+        <a href="#" class="btn">Powrót do strony głównej</a>
+    </div>
+</body>
+</html>

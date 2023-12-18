@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warunki Pogodowe</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url('{% static "gory.jpg" %}');
+        background-size: cover;
+        background-repeat: no-repeat;
+        align-items: center; /* Centralizacja wertykalna */
+        justify-content: center; /* Centralizacja pozioma */
+        height: 100vh; /* Ustaw wysokość na całą wysokość widoku */
+    }
+
+    header {
+        background-color: #130D29;
+        color: #fff;
+        padding: 10px 0;
+    }
+
+    nav {
+        text-align: center;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    ul li {
+        margin-right: 20px;
+    }
+
+    ul li:last-child {
+        margin-right: 0;
+    }
+
+    a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 18px;
+    }
+
+    a:hover {
+        border-bottom: 2px solid #fff;
+    }
+
+    @media screen and (max-width: 768px) {
+        ul {
+            flex-direction: column;
+        }
+
+        ul li {
+            margin-right: 0;
+            margin-bottom: 10px;
+        }
+    }
+
+    #weather-widget {
+        text-align: center;
+        margin: 20px;
+        padding: 20px;
+        background-color: #f0f0f0;
+        border-radius: 10px;
+    }
+
+    #weather-icon {
+        width: 80px;
+        height: 80px;
+    }
+
+.container {
+        display: flex;
+        flex-direction: column; /* Użyj flexbox z ukierunkowaniem na kolumnę */
+        min-height: 100vh; /* Minimalna wysokość kontenera na całą wysokość widoku */
+        align-items: center;
+    }
+
+    .section {
+        width: 50%;
+        background-color: rgba(255, 255, 255, 0.3);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin: 10px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    }
+
+    .section:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .section h2 {
+        font-size: 28px;
+        color: #130D29;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    .section ul {
+        list-style-type: disc;
+        padding-left: 20px;
+    }
+
+    .section ul li {
+        margin-bottom: 10px;
+        font-size: 18px;
+    }
+
+    .section ul li a {
+        text-decoration: none;
+        color: #000000;
+    }
+
+    .section p {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    /* Dodaj stylizację do elementów ul i li */
+    .section ul {
+        list-style-type: disc;
+        padding-left: 20px;
+    }
+
+    .section ul li {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .section ul li a {
+        text-decoration: none;
+        color: #0078d4;
+    }
+
+    footer {
+        background-color: #130D29;
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+        align-self: flex-end; /* Umieść stopkę na dole poprzez align-self */
+    }
+
+    footer ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    footer ul li {
+        margin-right: 20px;
+    }
+
+    footer ul li:last-child {
+        margin-right: 0;
+    }
+
+    footer a {
+        text-decoration: none;
+        color: #fff;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">O Nas</a></li>
+                <li><a href="{% url 'szkolenia' %}">Szkolenia i Kursy</a></li>
+                <li><a href="#">Ekwipunek i Technologia</a></li>
+                <li><a href="#">Akcje Ratunkowe</a></li>
+                <li><a href="#">Galeria</a></li>
+                <li><a href="#">Kontakt</a></li>
+                <li><a href="{% url 'zgloszenie' %}">Zgłoś Pomoc</a></li>
+                <li><a href="{% url 'lista_wypraw' %}">Lista Wypraw</a></li>
+                <li><a href="trasa">Trasy</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">Wyloguj</a></li>
+                <li>Witaj, {{ user.username }}!</li>
+                {% else %}
+                <li><a href="{% url 'login' %}">Zaloguj</a></li>
+                <li><a href="{% url 'register' %}">Zarejestruj</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <a class="weatherwidget-io" href="https://forecast7.com/pl/49d3019d95/zakopane/"
+    data-label_1="ZAKOPANE"
+    data-label_2="POGODA"
+    data-theme="original"
+    data-basecolor="#130d29">Pogoda w Zakopanem</a>
+    <script>
+        !function(d,s,id){
+            var js,fjs=d.getElementsByTagName(s)[0];
+            if(!d.getElementById(id)){
+                js=d.createElement(s);
+                js.id=id;
+                js.src='https://weatherwidget.io/js/widget.min.js';
+                fjs.parentNode.insertBefore(js,fjs);
+            }
+        }(document,'script','weatherwidget-io-js');
+    </script>
+
+<div class="container">
+    <div class="section">
+        <h2>Aktualności</h2>
+        <ul>
+            <li><a href="#">Nowy rekord wspinaczki na Rysy</a></li>
+            <li><a href="#">Nowe trasy górskie otwarte dla turystów</a></li>
+            <li><a href="#">Najnowsze informacje o warunkach pogodowych</a></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Porady</h2>
+        <ul>
+            <li><a href="#">Jak przygotować się do wspinaczki w górach</a></li>
+            <li><a href="#">Porady dotyczące bezpieczeństwa na szlaku</a></li>
+            <li><a href="#">Jak dbać o środowisko naturalne podczas wędrówki</a></li>
+        </ul>
+    </div>
+</div>
+
+    <footer>
+        <p>Kontakt: kontakt@twojadomena.pl</p>
+        <ul>
+            <li><a href="#">Polityka prywatności</a></li>
+            <li><a href="#">Regulamin</a></li>
+        </ul>
+    </footer>
+</body>
+</html>

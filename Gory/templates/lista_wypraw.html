@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista Wypraw</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('/static/gory.jpg'); /* Ścieżka do obrazu w katalogu static */
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        header {
+            background-color: #130D29;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        nav {
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex; /* Ustawienie menu na flexbox */
+            justify-content: center; /* Wyśrodkowanie elementów menu */
+            flex-wrap: wrap; /* Zawijanie elementów menu na mniejszych ekranach */
+        }
+
+        ul li {
+            margin-right: 20px;
+        }
+
+        ul li:last-child {
+            margin-right: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        a:hover {
+            border-bottom: 2px solid #fff;
+        }
+
+        a.btn {
+            display: inline-block;
+            background-color: #4e387e; /* Kolor przycisków */
+            color: #fff;
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+
+        a.btn:hover {
+            background-color: #6a4c93; /* Kolor przycisków po najechaniu myszką */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">O Nas</a></li>
+                <li><a href="#">Szkolenia i Kursy</a></li>
+                <li><a href="#">Ekwipunek i Technologia</a></li>
+                <li><a href="#">Akcje Ratunkowe</a></li>
+                <li><a href="#">Galeria</a></li>
+                <li><a href="#">Kontakt</a></li>
+                <li><a href="{% url 'zgloszenie' %}">Zgłoś Pomoc</a></li>
+                <li><a href="{% url 'lista_wypraw' %}">Lista Wypraw</a></li>
+                <li><a href="trasa">Trasy</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">Wyloguj</a></li>
+                <li>Witaj, {{ user.username }}!</li>
+                {% else %}
+                <li><a href="{% url 'login' %}">Zaloguj</a></li>
+                <li><a href="{% url 'register' %}">Zarejestruj</a></li>
+    {% endif %}
+        </ul>
+            </ul>
+    </header>
+
+    <ul>
+        {% for wyprawa in wyprawy %}
+            <li style="list-style: none; background: #f3f3f3; padding: 15px; margin: 10px; border-radius: 5px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <strong>Nazwa szczytu:</strong> {{ wyprawa.nazwa_szczytu }}<br>
+                    <strong>Godzina wyjścia:</strong> {{ wyprawa.godzina_wyjscia }}<br>
+                    <strong>Godzina zakończenia:</strong> {{ wyprawa.godzina_zakonczenia }}<br>
+                    <strong>Czas trwania:</strong> {{ wyprawa.czas_trwania }} minut<br>
+                    {% if wyprawa.ukonczona %}
+                        <strong>Status:</strong> Ukończona<br>
+                        <a href="{% url 'ukoncz_wyprawe' wyprawa.id %}" class="btn" style="background: #e74c3c; color: #fff;">Oznacz jako nieukończona</a>
+                    {% else %}
+                        <strong>Status:</strong> Nieukończona<br>
+                        
+                        <a href="{% url 'ukoncz_wyprawe' wyprawa.id %}" class="btn" style="background: #2ecc71; color: #fff;">Oznacz jako ukończona</a>
+                        
+                    {% endif %}
+                    <div>
+                        <a href="{% url 'usun_wyprawe' wyprawa.id %}" class="btn" style="background: #e74c3c; color: #fff;">Usuń Wyprawę</a>
+                    </div>
+                </div>
+                
+            </li>
+        {% empty %}
+            <p>Brak dodanych wypraw.</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>
